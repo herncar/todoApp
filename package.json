@@ -2,5 +2,23 @@
   "dependencies": {
     "express": "^4.18.1",
     "pg": "^8.7.3"
-  }
+  },
+  "name": "todoapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/herncar/todoApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/herncar/todoApp/issues"
+  },
+  "homepage": "https://github.com/herncar/todoApp#readme",
+  "description": ""
 }
