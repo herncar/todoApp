@@ -1,6 +1,10 @@
 import { AiFillDelete } from "react-icons/ai";
 
-//Delete button sends DELETE request to server
+/**
+ * 
+ * @param {id} props 
+ * @returns Button used to send DELETE request to server
+ */
 function Delete(props){
    
     return(
