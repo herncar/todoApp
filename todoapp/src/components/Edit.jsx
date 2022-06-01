@@ -2,6 +2,11 @@ import { AiFillEdit } from "react-icons/ai";
 
 // Edit Button Triggered by click
 // sends put request and updates task description
+/**
+ * 
+ * @param {description} props 
+ * @returns Returns button used to send PUT request to server
+ */
 function Edit(props){
    
     return(
