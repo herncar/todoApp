@@ -1,11 +1,11 @@
 import { AiFillDelete } from "react-icons/ai";
 
-
+//Delete button sends DELETE request to server
 function Delete(props){
    
     return(
         
-        <button onClick={(e) => deleteTask(props.id)}><AiFillDelete size='25px' /></button>
+        <button onClick={(event) => deleteTask(props.id)}><AiFillDelete size='25px' /></button>
     )
 }
 function deleteTask(id) {
@@ -21,5 +21,6 @@ function deleteTask(id) {
         
       });
       */
+      
   }
 export default Delete

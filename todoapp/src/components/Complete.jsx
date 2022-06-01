@@ -1,12 +1,23 @@
-import { AiFillCheckCircle } from 'react-icons/ai';
 
+import { AiFillCheckCircle } from 'react-icons/ai';
+/**
+ * 
+ * @param {id,descriptionm=,status} props 
+ * @returns If Button is pending returns button used to complete task
+ */
 
 function Complete(props){
-   
+   if(props.status===false){
     return(
         
-        <button onClick={(e) => completeTask(props.id,props.description)}><AiFillCheckCircle size='25px' /></button>
+        <button onClick={(event) => completeTask(props.id,props.description)}><AiFillCheckCircle size='25px' /></button>
     )
+   }
+   return(
+        
+    <button hidden onClick={(event) => completeTask(props.id,props.description)}><AiFillCheckCircle size='25px' /></button>
+)
+   
 }
 function completeTask(id,descriptions){
   let description=descriptions
@@ -26,5 +37,6 @@ function completeTask(id,descriptions){
         
       });
       */
+      
 }
 export default Complete

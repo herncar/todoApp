@@ -1,10 +1,11 @@
 import { AiFillEdit } from "react-icons/ai";
 
+// Edit Button Triggered by click
+// sends put request and updates task description
 function Edit(props){
    
     return(
-        
-        <button onClick={(e) => editTask(props)}><AiFillEdit size='25px' /></button>
+        <button onClick={(event) => editTask(props)}><AiFillEdit size='25px' /></button>
     )
 }
 function editTask(props) {
@@ -24,6 +25,7 @@ function editTask(props) {
       .then(data => {
         alert(data);
       });*/
+    }
+    
   }
-}
 export default Edit
