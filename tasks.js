@@ -1,6 +1,6 @@
 const Pool = require('pg').Pool
 const pool = new Pool({
-    user: 'postgres',
+    user: 'carlos',
     host: 'localhost',
     database:'todo_list',
     password:'postgres',
@@ -10,6 +10,26 @@ const pool = new Pool({
 const getTasks=()=>{
     return new Promise( function(resolve, reject){
         pool.query('SELECT * FROM tasks ORDER BY id ASC',(error, results)=>{
+            if(error){
+                reject(error)
+            }
+            resolve(results.rows);
+        })
+    })
+}
+const getCompletedTasks=()=>{
+    return new Promise( function(resolve, reject){
+        pool.query('SELECT * FROM tasks WHERE status = true ORDER BY id ASC',(error, results)=>{
+            if(error){
+                reject(error)
+            }
+            resolve(results.rows);
+        })
+    })
+}
+const getPendingTasks=()=>{
+    return new Promise( function(resolve, reject){
+        pool.query('SELECT * FROM tasks WHERE status = false ORDER BY id ASC',(error, results)=>{
             if(error){
                 reject(error)
             }
@@ -35,6 +55,7 @@ const deleteTask= (id)=>{
     
         pool.query('DELETE FROM tasks WHERE id = $1', [id], (error, results) => {
             if (error) {
+                console.log(error)
               reject(error)
             }
             resolve(`Task Successfully Deleted`)
@@ -76,4 +97,6 @@ module.exports={
     addTask,
     editTask,
     completeTask,
+    getCompletedTasks,
+    getPendingTasks,
 }

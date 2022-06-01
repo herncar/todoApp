@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 5000
+const port = 3001
 
 const tasks = require('./tasks.js')
 
@@ -14,6 +14,24 @@ app.use(function (req, res, next) {
 
 app.get('/', (req, res) => {
   tasks.getTasks()
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+app.get('/completed', (req, res) => {
+  tasks.getCompletedTasks()
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+app.get('/pending', (req, res) => {
+  tasks.getPendingTasks()
   .then(response => {
     res.status(200).send(response);
   })
@@ -43,7 +61,7 @@ app.delete('/tasks/:id', (req, res) => {
   })
 })
 
-  app.put('/tasks/:id', (req, res) => {
+app.put('/tasks/:id', (req, res) => {
     
   tasks.editTask(req.body,req.params.id)
   .then(response => {
