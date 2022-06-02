@@ -8,7 +8,7 @@ function App() {
     <>
     <div className="container w-50 mw-50 ">
     <h1 class="display-5 w-100">My To Do List</h1>
-    <Create/>
+    
     <Filter/>
     
     </div>

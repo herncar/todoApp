@@ -23,13 +23,14 @@ function editTask(props) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({description,status}),
-    })/*
+    }).then(props.setChange(props.change+1))/*
       .then(response => {
         return response.text();
       })
       .then(data => {
         alert(data);
       });*/
+      
     }
     
   }

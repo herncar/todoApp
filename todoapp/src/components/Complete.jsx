@@ -10,16 +10,19 @@ function Complete(props){
    if(props.status===false){
     return(
         
-        <button onClick={(event) => completeTask(props.id,props.description)}><AiFillCheckCircle size='25px' /></button>
+        <button onClick={(event) => completeTask(props.id,props.description,props.setChange,props.change)}><AiFillCheckCircle size='25px' /></button>
     )
    }
    return(
-        
-    <button hidden onClick={(event) => completeTask(props.id,props.description)}><AiFillCheckCircle size='25px' /></button>
+     <>
+     
+    <button hidden onClick={(event) => completeTask(props.id,props.description,props.setChange,props.change)}><AiFillCheckCircle size='25px' /></button>
+    </>
 )
    
 }
-function completeTask(id,descriptions){
+function completeTask(id,descriptions,setChange,change){
+  
   let description=descriptions
   let status= true
     fetch(`/tasks/${parseInt(id)}`, {
@@ -28,7 +31,7 @@ function completeTask(id,descriptions){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({description,status})
-    })/*
+    }).then(setChange(change+1))/*
       .then(response => {
         return response.text();
       })
@@ -37,6 +40,7 @@ function completeTask(id,descriptions){
         
       });
       */
+      
       
 }
 export default Complete

@@ -3,7 +3,7 @@ import React, { useState,useEffect } from 'react';
 import Edit from "./Edit";
 import Complete from "./Complete";
 import Status from "./Status";
-
+import Create from "./Create";
 /**
  * 
  * @param {filter} props 
@@ -13,8 +13,10 @@ import Status from "./Status";
 
 function GetToDoList(props){
   const [tasks, setTasks] = useState([]);
+  const[change,setChange]= useState(0)
   
   const getTasks = async () => {
+    console.log("test")
     try {
       if(props.text===""){
       const response = await fetch("/all", {
@@ -59,12 +61,12 @@ function GetToDoList(props){
 
   useEffect(() => {
     getTasks();
-  },[props]);
+  },[props,change]);
 
   return (
     //creating and returning table
     <>
-    
+    <Create setChange={setChange} change={change}/>
     <div className="container">
       <table  className="table table-hover table-striped table-sm mw-100">
         <thead>
@@ -83,13 +85,13 @@ function GetToDoList(props){
               <th className="table-success w-50" scope="row">{tasks.description}</th>
               <td className="table-success"><Status status={tasks.status}/></td>
               <td className="table-success">
-              <Edit id={tasks.id}description={tasks.description} status={tasks.status}/>
+              <Edit id={tasks.id}description={tasks.description} status={tasks.status} setChange={setChange}change={change}/>
               </td>
               <td className="table-success">
-               <Delete id={tasks.id} />
+               <Delete id={tasks.id} setChange={setChange} change={change}/>
               </td>
               <td className="table-success">
-               <Complete id={tasks.id} description={tasks.description} status={tasks.status}/>
+               <Complete id={tasks.id} description={tasks.description} status={tasks.status} setChange={setChange} change={change}/>
               </td>
             </tr>
             

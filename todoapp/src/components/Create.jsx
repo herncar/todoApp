@@ -7,20 +7,22 @@ import { IoIosAddCircle } from "react-icons/io";
  * 
  * @returns Input form used POST to server
  */
-function Create(){
+function Create(props){
 
     const [description, setDescription] = useState("Add new task");
-    const createTask=(event,description)=>{
+    const createTask=(event,description,setChange,change)=>{
+      
       event.preventDefault();
-      postTask(description)
+      postTask(description,setChange,change)
       setDescription("Add new task")  
+      
     }
     return(
         <>
         <div>
         <form>
             <input className="w-75 mw-75" type='text'value={description} onChange={event => setDescription(event.target.value)} onClick={(event) => setDescription("")}></input>
-            <button className="w-25" type="submit"onClick={(event) => createTask(event,description)}><IoIosAddCircle size='25px' /></button>
+            <button className="w-25" type="submit"onClick={(event) => createTask(event,description,props.setChange,props.change)}><IoIosAddCircle size='25px' /></button>
         </form>
         </div>
         </>
@@ -28,7 +30,7 @@ function Create(){
 }
 
 
-function postTask(description) {
+function postTask(description,setChange,change) {
  
     let status = false
     if(description!==null&& description!==""&&description!=="Add new task"){
@@ -38,7 +40,7 @@ function postTask(description) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({description,status}),
-    })/*
+    }).then(setChange(change+1))/*
       .then(response => {
         return response.text();
       })
