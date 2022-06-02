@@ -13,7 +13,7 @@ import Status from "./Status";
 
 function GetToDoList(props){
   const [tasks, setTasks] = useState([]);
-  console.log(props)
+  
   const getTasks = async () => {
     try {
       if(props.text===""){
@@ -59,7 +59,7 @@ function GetToDoList(props){
 
   useEffect(() => {
     getTasks();
-  },[]);
+  },[props]);
 
   return (
     //creating and returning table
@@ -70,9 +70,10 @@ function GetToDoList(props){
         <thead>
           <tr>
             <th scope="col">Description</th>
+            <th scope="col">Status</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
-            <th scope="col">Status</th>
+            
             <th scope="col">Complete</th>
           </tr>
         </thead>
