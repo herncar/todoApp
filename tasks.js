@@ -8,8 +8,7 @@ const proConfig = process.env.DATABASE_URL; //heroku addons
 
 const pool = new Pool({
   connectionString:
-    proConfig,
-    ssl: { rejectUnauthorized: false },
+    process.env.NODE_ENV === "production" ? proConfig : devConfig
 });
 const getTasks=()=>{
 
