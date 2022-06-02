@@ -59,7 +59,7 @@ function GetToDoList(props){
 
   useEffect(() => {
     getTasks();
-  });
+  },[]);
 
   return (
     //creating and returning table
