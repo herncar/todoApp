@@ -13,27 +13,46 @@ import Status from "./Status";
 
 function GetToDoList(props){
   const [tasks, setTasks] = useState([]);
+  console.log(props)
   const getTasks = async () => {
     try {
       if(props.text===""){
-      const response = await fetch("http://localhost:3001/");
+      const response = await fetch("/all", {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+  
+      })
       const jsonData = await response.json();
-      
       setTasks(jsonData);
       }
       if(props.text==="true"){
-        const response = await fetch("http://localhost:3001/completed");
+        const response = await fetch("/completed", {
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           }
+    
+        })
         const jsonData = await response.json();
         
         setTasks(jsonData);
         }
         if(props.text==="false"){
-          const response = await fetch("http://localhost:3001/pending");
+          const response = await fetch("/pending", {
+            headers : { 
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+             }
+      
+          })
           const jsonData = await response.json();
           
           setTasks(jsonData);
           }
     } catch (err) {
+      console.log(err)
       console.error(err.message);
     }
   };

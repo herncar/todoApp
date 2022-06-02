@@ -1,13 +1,17 @@
 const Pool = require('pg').Pool
-const pool = new Pool({
-    user: 'carlos',
-    host: 'localhost',
-    database:'todo_list',
-    password:'postgres',
-    port: 5432,
-})
+require("dotenv").config();
 
+
+const devConfig = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`;
+
+const proConfig = process.env.DATABASE_URL; //heroku addons
+
+const pool = new Pool({
+  connectionString:
+    process.env.NODE_ENV === "production" ? proConfig : devConfig,
+});
 const getTasks=()=>{
+
     return new Promise( function(resolve, reject){
         pool.query('SELECT * FROM tasks ORDER BY id ASC',(error, results)=>{
             if(error){
@@ -55,7 +59,6 @@ const deleteTask= (id)=>{
     
         pool.query('DELETE FROM tasks WHERE id = $1', [id], (error, results) => {
             if (error) {
-                console.log(error)
               reject(error)
             }
             resolve(`Task Successfully Deleted`)
@@ -66,9 +69,7 @@ const deleteTask= (id)=>{
 const editTask=(body, id)=>{
     return new Promise( function(resolve, reject){
         const {description,status}=body
-        console.log(body)
-        console.log(description)
-        console.log(status)
+      
         pool.query('UPDATE tasks SET description =$1,status=$2 WHERE id=$3', [description,status,parseInt(id)], (error, results) => {
             if (error) {
               reject(error)

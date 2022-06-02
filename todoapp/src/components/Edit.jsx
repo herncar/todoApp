@@ -17,7 +17,7 @@ function editTask(props) {
     let description = prompt('Edit description',props.description);
     let status = props.status
     if(description!==null){
-    fetch(`http://localhost:3001/tasks/${parseInt(props.id)}`, {
+    fetch(`/tasks/${parseInt(props.id)}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

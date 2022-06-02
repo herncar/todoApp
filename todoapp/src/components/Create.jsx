@@ -32,7 +32,7 @@ function postTask(description) {
  
     let status = false
     if(description!==null&& description!==""&&description!=="Add new task"){
-    fetch(`http://localhost:3001/tasks`, {
+    fetch(`/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

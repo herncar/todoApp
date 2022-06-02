@@ -14,7 +14,7 @@ function Delete(props){
 }
 function deleteTask(id) {
     
-    fetch(`http://localhost:3001/tasks/${parseInt(id)}`, {
+    fetch(`/tasks/${parseInt(id)}`, {
       method: 'DELETE',
     })/*
       .then(response => {

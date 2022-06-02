@@ -11,15 +11,15 @@ function Filter(){
     <>
     
     <div className="radio-toolbar" onChange={event=>setFilter(event.target.value)}>
-    <fil className="container w-25 ">Filter</fil> 
+    <label className="container w-25 ">Filter</label> 
     <input type="radio" id="radioAll" name="radioFilter" value="" defaultChecked></input>
-    <label className="container w-25" for="radioAll">All</label>
+    <label className="container w-25" htmlFor="radioAll">All</label>
     
     <input type="radio" id="radioPending" name="radioFilter" value="false"></input>
-    <label className="container w-25" for="radioPending">Pending</label>
+    <label className="container w-25" htmlFor="radioPending">Pending</label>
 
     <input type="radio" id="radioComplete" name="radioFilter" value="true"></input>
-    <label className="container w-25" for="radioComplete">Complete</label> 
+    <label className="container w-25" htmlFor="radioComplete">Complete</label> 
     </div>
     
     <GetToDoList text={filter}/>

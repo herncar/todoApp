@@ -22,7 +22,7 @@ function Complete(props){
 function completeTask(id,descriptions){
   let description=descriptions
   let status= true
-    fetch(`http://localhost:3001/tasks/${parseInt(id)}`, {
+    fetch(`/tasks/${parseInt(id)}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

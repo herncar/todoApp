@@ -1,18 +1,20 @@
 const express = require('express')
 const app = express()
-const port = 3001
-
+const path= require("path")
+const PORT = process.env.PORT||3001
+const cors= require("cors")
+app.use(cors());
 const tasks = require('./tasks.js')
 
 app.use(express.json())
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
-  next();
-});
+app.use(express.static(path.resolve(__dirname, "./todoapp/build")));
+if(process.env.NODE_ENV==="production"){
+  app.use(express.static(path.join(__dirname,"todoapp/build")));
+}
 
-app.get('/', (req, res) => {
+
+
+app.get('/all', (req, res) => {
   tasks.getTasks()
   .then(response => {
     res.status(200).send(response);
@@ -71,8 +73,12 @@ app.put('/tasks/:id', (req, res) => {
     res.status(500).send(error);
   })
 })
+app.get("*", (req, res, next) => {
+
+  res.sendFile(path.resolve(__dirname, "./todoapp/build", "index.html"));
+});
   
   
-app.listen(port, () => {
-    console.log(`App running on port ${port}.`)
+app.listen(PORT, () => {
+    console.log(`App running on port ${PORT}.`)
   })
